@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <a href="{% url "stats" %}">
-                        🏆 Топы
+                        🏆 Рейтинг
                     </a>
                 </li>
             </ul>
@@ -41,22 +41,22 @@
                 </li>
                 <li>
                     <a href="{% url "feed_label" "ama" %}" class="{% if label_code == "ama" %}feed-sidebar-menu-selected{% endif %}">
-                        ✋ AMA
+                        ✋ Интервью
                     </a>
                 </li>
                 <li>
                     <a href="{% url "feed_label" "inside" %}" class="{% if label_code == "inside" %}feed-sidebar-menu-selected{% endif %}">
-                        💎️ Инсайды
+                        💎️ Мероприятия
                     </a>
                 </li>
                 <li>
                     <a href="{% url "feed_label" "thread" %}" class="{% if label_code == "thread" %}feed-sidebar-menu-selected{% endif %}">
-                        🗄 Треды
+                        🗄 Флуд
                     </a>
                 </li>
                 <li>
                     <a href="{% url "feed_type" "guide" %}" class="{% if post_type == "guide" %}feed-sidebar-menu-selected{% endif %}">
-                        🗺 Путеводители
+                        🗺 Истории
                     </a>
                 </li>
                 <li>
@@ -66,7 +66,7 @@
                 </li>
                 <li>
                     <a href="{% url "feed_type" "link" %}" class="{% if post_type == "link" %}feed-sidebar-menu-selected{% endif %}">
-                        🔗 Ссылки
+                        🔗 Для студентов
                     </a>
                 </li>
                 <li>
