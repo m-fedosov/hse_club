@@ -31,8 +31,8 @@ Feel free to propose "state of the art" refactorings for UI or backend code if y
 2. Clone the repo
 
     ```sh
-    $ git clone https://github.com/vas3k/vas3k.club.git
-    $ cd vas3k.club
+    $ git clone https://github.com/m-fedosov/hse_club
+    $ cd hse_club
     ```
 
 3. Run
