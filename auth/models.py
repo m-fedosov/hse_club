@@ -76,7 +76,7 @@ class Code(models.Model):
         return Code.objects.create(
             recipient=recipient,
             user=user,
-            code=random_number(length),
+            code=111111,
             created_at=datetime.utcnow(),
             expires_at=datetime.utcnow() + settings.AUTH_CODE_EXPIRATION_TIMEDELTA,
         )

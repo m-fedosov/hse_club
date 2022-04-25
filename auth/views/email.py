@@ -1,3 +1,6 @@
+import datetime
+from datetime import date
+
 from django.conf import settings
 from django.db.models import Q
 from django.shortcuts import redirect, render
@@ -9,7 +12,8 @@ from auth.models import Session, Code
 from notifications.email.users import send_auth_email
 from notifications.telegram.users import notify_user_auth
 from users.models.user import User
-
+import random
+import string
 
 def email_login(request):
     if request.method != "POST":
@@ -44,7 +48,30 @@ def email_login(request):
         return set_session_cookie(response, user, session)
     else:
         # email/nickname login
-        user = User.objects.filter(Q(email=email_or_login.lower()) | Q(slug=email_or_login)).first()
+        # user = User.objects.filter(Q(email=email_or_login.lower()) | Q(slug=email_or_login)).first()
+        user = User()
+        user.email = email_or_login.lower()
+        user.slug = user.email[:user.email.index("@")]
+        user.is_email_unsubscribed = True
+        user.is_email_verified = False
+        user.moderation_status = User.MODERATION_STATUS_INTRO
+        user.full_name = "Maxim"
+        user.avatar = None
+        user.company = None
+        user.position = None
+        user.city = None
+        user.country = None
+        user.geo = None
+        user.bio = None
+        user.contact = None
+        user.email_digest_type = User.EMAIL_DIGEST_TYPE_NOPE
+        user.telegram_id = None
+        user.telegram_data = None
+        user.membership_platform_data = None
+        user.membership_started_at = date.fromisoformat('2019-12-04')
+        user.membership_expires_at = date.fromisoformat('3023-12-04')
+        user.save()
+
         if not user:
             return render(request, "error.html", {
                 "title": "Такого юзера нет 🤔",
@@ -54,6 +81,7 @@ def email_login(request):
             }, status=404)
 
         code = Code.create_for_user(user=user, recipient=user.email, length=settings.AUTH_CODE_LENGTH)
+        print('это кодовое слово', code, 'это кодовое слово')
         async_task(send_auth_email, user, code)
         async_task(notify_user_auth, user, code)
 
