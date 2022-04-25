@@ -72,16 +72,19 @@ def email_login(request):
         user.membership_expires_at = date.fromisoformat('3023-12-04')
         user.save()
 
-        if not user:
+        if (not user) or ((user.email[-7:] != ".hse.ru") and (user.email[-7:] != "@hse.ru")):
             return render(request, "error.html", {
-                "title": "Такого юзера нет 🤔",
-                "message": "Пользователь с такой почтой не найден в списке членов Клуба. "
-                           "Попробуйте вышкинскую почту или никнейм. "
-                           "Если совсем ничего не выйдет, напишите нам, попробуем помочь.",
+                "title": "Кто ты такой 🤔",
+                "message": "Пользователь с такой почтой не найден в списке членов Клуба."
+                        "<ul><li>Попробуйте <b>вышкинскую</b> почту или никнейм(если ты уже состоишь в клубе): </li>"
+                           " <ul><li>email@hse.ru</li>"
+                           " <li>name@miem.hse.ru</li>"
+                           " <li>nice@edu.hse.ru</li></ul>"
+                           "<li>Если совсем ничего не выйдет, напишите нам, попробуем помочь.</li>"
+                        "</ul>"
             }, status=404)
 
         code = Code.create_for_user(user=user, recipient=user.email, length=settings.AUTH_CODE_LENGTH)
-        print('это кодовое слово', code, 'это кодовое слово')
         async_task(send_auth_email, user, code)
         async_task(notify_user_auth, user, code)
 
@@ -104,7 +107,7 @@ def email_login_code(request):
 
     user = Code.check_code(recipient=email, code=code)
     session = Session.create_for_user(user)
-
+    
     if not user.is_email_verified:
         # save 1 click and verify email
         user.is_email_verified = True
