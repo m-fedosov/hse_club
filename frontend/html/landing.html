@@ -4,7 +4,7 @@
 {% load render_bundle from webpack_loader %}
 <html lang="ru" theme="dark">
 <head>
-    <title>{% block title %}Хайер Клаб{% endblock %}</title>
+    <title>{% block title %}Хайер 🐦 Клаб{% endblock %}</title>
     {% block fonts %}
         {% include "common/fonts.html" %}
     {% endblock %}
@@ -23,53 +23,44 @@
     <main class="landing">
         <div class="landing-block landing-block-limited">
             <div class="landing-title">
+                <br>
                 <h1>Хайер Клаб</h1>
-
             </div>
-
         </div>
-
         <div class="landing-block landing-block-narrow" id="why">
             <div>
-                <h4><a href="{% url "login" %}" class="button button-black">Войти</a></h4>
-                <h2>ЗАЧЕМ</h2>
-
+                <h4><a href="{% url "login" %}" class="button button-black" style="min-width: 300px;">Войти</a></h4>
+                <h4><a href="{% url "join" %}" class="button button-black" style="min-width: 300px;">Зарегистрироваться</a></h4>
+                <h2>ЗАЧЕМ?</h2>
                 <p>
                     Здесь будет описание...
                 </p>
-
                 <p>
                     ...И здесь тоже
                 </p>
             </div>
         </div>
-
         <div class="landing-block landing-block-limited" id="features">
             <h2 class="landing-block-title">Что внутри?</h2>
                 <p>
                     Здесь будет описание...
                 </p>
         </div>
-
         <div class="landing-block landing-block-limited">
             <h2>Здесь будет описание клуба</h2>
         </div>
-
         <div class="landing-block landing-screenshots hide-on-iphone">
             <h2>Здесь будут скрины</h2>
         </div>
-
         <div class="landing-block landing-block-limited">
 
             <div class="landing-block-50">
                 <h3 class="feature-title">Студенческие организации</h3>
             </div>
         </div>
-
         <div class="landing-block landing-block-chats">
             <h2>Здесь будет описание чатов</h2>
         </div>
-
         <div class="landing-block landing-block-limited">
             <h2>Здесь будет описание клуба</h2>
         </div>
@@ -77,7 +68,6 @@
         <div class="landing-block landing-block-limited landing-block-map-title" id="map">
             <h3>Здесь будет описание клуба</h3>
         </div>
-
         <div class="landing-block landing-block-map">
             <h2>Здесь будет описание карты</h2>
             <div class="map-container">
@@ -86,7 +76,6 @@
                 </div>
             </div>
         </div>
-
         <div class="landing-block landing-block-narrow" id="join">
             <div>
                 <h2 class="landing-block-title">Как вступить?</h2>
@@ -94,7 +83,8 @@
                     Только для студентов Вышки
                 </p>
                 <p>
-                    <a href="{% url "join" %}" class="button button-black button-big">Вступить в Клуб</a>
+                    <h4><a href="{% url "login" %}" class="button button-black" style="min-width: 300px;">Войти</a></h4>
+                    <h4><a href="{% url "join" %}" class="button button-black" style="min-width: 300px;">Зарегистрироваться</a></h4>
                 </p>
             </div>
         </div>

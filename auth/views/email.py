@@ -18,14 +18,11 @@ import string
 def email_login(request):
     if request.method != "POST":
         return redirect("login")
-
     goto = request.POST.get("goto")
     email_or_login = request.POST.get("email_or_login")
     if not email_or_login:
         return redirect("login")
-
     email_or_login = email_or_login.strip()
-
     if "|-" in email_or_login:
         # secret_hash login
         email_part, secret_hash_part = email_or_login.split("|-", 1)
@@ -36,12 +33,10 @@ def email_login(request):
                 "message": "Пользователь с таким кодом не найден. "
                            "Попробуйте авторизоваться по вышкинской почте или юзернейму.",
             }, status=404)
-
         if user.deleted_at:
             # cancel user deletion
             user.deleted_at = None
             user.save()
-
         session = Session.create_for_user(user)
         redirect_to = reverse("profile", args=[user.slug]) if not goto else goto
         response = redirect(redirect_to)
@@ -82,11 +77,9 @@ def email_login(request):
                                "</ul>"
                 }, status=404)
             user.save()
-
         code = Code.create_for_user(user=user, recipient=user.email, length=settings.AUTH_CODE_LENGTH)
         async_task(send_auth_email, user, code)
         async_task(notify_user_auth, user, code)
-
         return render(request, "auth/email.html", {
             "email": user.email,
             "goto": goto,
