@@ -10,11 +10,11 @@
             <br><br>
             Если вам не подходят наши <a href="{% url "docs" "about" %}" target="_blank">правила</a>, вы боитесь деанона или прилетели «просто почитать посты» рекомендуем сэкономить нам всем время и пойти на <a href="https://vk.ru/" rel="nofollow">ВКонтач</a>, там тоже есть немало Вышкинских сообществ.
         </div>
-        <form action="{% url "email_login" %}" method="post">
+        <form action="{% url "email_auth" %}" method="post">
         <div class="join-subtitle">Для регистрации введи свою почту вышки или ник</div>
         <div class="block join-email">
             <div class="join-email-form">
-            <label>Вот сюда 👉&nbsp;&nbsp;<input type="text" name="email_or_login" value="{{ email|default:"" }}" placeholder="name@anything.hse.ru" class="login-email" style="min-width: 400px;" required></label>
+            <label>Вот сюда 👉&nbsp;&nbsp;<input type="email" name="email_or_login" value="{{ email|default:"" }}" placeholder="name@anything.hse.ru" class="login-email" style="min-width: 400px;" required></label>
             </div>
         </div>
         {% if goto %}<input type="hidden" name="goto" value="{{ goto }}">{% endif %}
